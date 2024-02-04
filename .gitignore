@@ -47,3 +47,11 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# not DS_Store
+.DS_Store
+
+# not .vscode
+.vscode/
+
+
