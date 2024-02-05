@@ -487,15 +487,15 @@ gilchrist <- as.numeric(strsplit(gilchrist, "")[[1]])
 
 # prior of a, b  prop to 1/(a*b)^2
 # transform theta1 = log(a), theta2 = log(b)
-# posterior of theta1, theta2 prop to prod_i p(x_i|theta1, theta2) * 1/(a*b)^2, with a = exp(theta1), b = exp(theta2)
+# posterior of theta1, theta2 prop to prod_i p(x_i|theta1, theta2) * 1/(a*b), with a = exp(theta1), b = exp(theta2)
 # prior grid
-prior_theta1 <- seq(-2.5, 2.5, 0.01)
-prior_theta2 <- seq(-2.5, 2.5, 0.01)
+prior_theta1 <- seq(-1, 3, 0.01)
+prior_theta2 <- seq(-1, 3, 0.01)
 
 # get posterior for theta1, theta2
 loglike_theta1_theta2 <- sapply(prior_theta1, function(theta1) {
     sapply(prior_theta2, function(theta2) {
-        sum(dpoisson_gamma(gilchrist, exp(theta1), exp(theta2), log = TRUE)) - 2 * (theta1 + theta2)
+        sum(dpoisson_gamma(gilchrist, exp(theta1), exp(theta2), log = TRUE)) - (theta1 + theta2)
     })
 }) |> apply(c(1, 2), sum)
 
@@ -546,6 +546,7 @@ table_level_curves_theta1_theta2 |> ggplot(aes(theta1, theta2)) +
     geom_hline(yintercept = c(theta2_005, theta2_095), color = "red") +
     theme_minimal() +
     ggtitle("Posterior for theta1, theta2")
+
 
 
 
