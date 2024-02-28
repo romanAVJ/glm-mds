@@ -1,0 +1,11 @@
+---
+title: "MCMC"
+output: html_notebook
+---
+
+This is a notebook for the MCMC section of the course. 
+
+```{r}
+```
+
+
